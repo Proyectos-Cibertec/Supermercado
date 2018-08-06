@@ -1,3 +1,4 @@
+// Login.java
 package inicio;
 
 import java.awt.Color;
@@ -155,7 +156,7 @@ public class Login extends JFrame implements ActionListener {
 	}
 
 	public void salir() {
-		int respuesta = Mensaje.mensajeConfirmacion(this, "¿Está seguro que desea salir?");
+		int respuesta = Mensaje.mensajeConfirmacion(this, "Est seguro que desea salir?");
 
 		if (respuesta == JOptionPane.YES_OPTION) {
 			System.exit(0);
@@ -167,9 +168,9 @@ public class Login extends JFrame implements ActionListener {
 		String usuario = this.txtUsuario.getText().trim();
 		String password = new String(this.txtPassword.getPassword());
 
-		// Validación de la entrada de usuario y password
+		// Validacin de la entrada de usuario y password
 		if (usuario.length() == 0 && password.length() == 0) {
-			Mensaje.mensajeError(this, "No debe dejar en blanco el nombre de usuario y contraseña");
+			Mensaje.mensajeError(this, "No debe dejar en blanco el nombre de usuario y contrasea");
 			txtUsuario.requestFocus();
 			return;
 
@@ -179,7 +180,7 @@ public class Login extends JFrame implements ActionListener {
 			return;
 
 		} else if (password.length() == 0) {
-			Mensaje.mensajeError(this, "No debe dejar en blanco la contraseña");
+			Mensaje.mensajeError(this, "No debe dejar en blanco la contrasea");
 			txtPassword.requestFocus();
 			return;
 		}
@@ -192,17 +193,17 @@ public class Login extends JFrame implements ActionListener {
 			contador++; // Cuenta las veces que un usuario intenta logearse al
 						// sistema
 
-			// Verifica que no se haya pasado el límite de intentos fallidos
+			// Verifica que no se haya pasado el lmite de intentos fallidos
 			if (contador == 3) {
 				Mensaje.mensajeError(this,
-						"Ha sobrepasado el límite de intentos fallidos. Comuníquese con el Administrador del Sistema");
+						"Ha sobrepasado el lmite de intentos fallidos. Comunquese con el Administrador del Sistema");
 				System.exit(0);
 			}
 
 			Mensaje.mensajeError(this,
-					"El usuario y/o contraseña que ha ingresado es incorrecto. Intente nuevamente.\n"
+					"El usuario y/o contrasea que ha ingresado es incorrecto. Intente nuevamente.\n"
 							+ "Verifique la tecla Bloq Mayus. Recuerde que luego de 3 intentos fallidos el programa "
-							+ "se cerrará.");
+							+ "se cerrar.");
 			txtUsuario.setText("");
 			txtPassword.setText("");
 			txtUsuario.requestFocus();
