@@ -31,6 +31,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -38,17 +39,17 @@ import javax.swing.table.TableColumnModel;
 
 import com.toedter.calendar.JDateChooser;
 
-import entidad.Distrito;
 import entidad.Cliente;
+import entidad.Distrito;
 import entidad.Sexo;
-import model.DistritoModel;
 import model.ClienteModel;
+import model.DistritoModel;
 import model.SexoModel;
+import util.Constantes;
 import util.FechaUtil;
 import util.Foto;
 import util.Mensaje;
 import util.TablaUtil;
-import javax.swing.border.LineBorder;
 
 public class FrmCliente extends JInternalFrame implements ActionListener, MouseListener, KeyListener {
 
@@ -624,9 +625,9 @@ public class FrmCliente extends JInternalFrame implements ActionListener, MouseL
 
 		if (salida > 0) {
 			this.listarClientes(modelo.listarCliente());
-			Mensaje.mensajeInformacion(this, "Registro exitoso");
+			Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_REGISTRATION);
 		} else {
-			Mensaje.mensajeError(this, "Ocurrió un error al registrar");
+			Mensaje.mensajeError(this, Constantes.MSG_FAILED_REGISTRATION);
 		}
 		this.limpiar();
 	}
@@ -642,16 +643,16 @@ public class FrmCliente extends JInternalFrame implements ActionListener, MouseL
 				this.listarClientes(modelo.listarCliente());
 
 				if (salida > 0) {
-					Mensaje.mensajeInformacion(this, "Eliminación correcta");
+					Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_REMOVED);
 				} else {
-					Mensaje.mensajeError(this, "Ocurrió un error al intentar eliminar");
+					Mensaje.mensajeError(this, Constantes.MSG_FAILED_REMOVED);
 				}
 				this.limpiar();
 				this.idSeleccionado = "";
 			}
 
 		} else {
-			Mensaje.mensajeAdvertencia(this, "Debe seleccionar una fila para eliminar");
+			Mensaje.mensajeAdvertencia(this, Constantes.MSG_SELECT_ROW_TO_DELETE);
 		}
 	}
 
@@ -781,9 +782,9 @@ public class FrmCliente extends JInternalFrame implements ActionListener, MouseL
 				this.listarClientes(modelo.listarCliente());
 
 				if (salida > 0) {
-					Mensaje.mensajeInformacion(this, "Actualización correcta");
+					Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_UPDATED);
 				} else {
-					Mensaje.mensajeError(this, "Ocurrió un error al intentar actualizar");
+					Mensaje.mensajeError(this, Constantes.MSG_FAILED_UPDATED);
 				}
 
 				this.limpiar();
@@ -791,7 +792,7 @@ public class FrmCliente extends JInternalFrame implements ActionListener, MouseL
 			}
 
 		} else {
-			Mensaje.mensajeAdvertencia(this, "Debe seleccionar una fila para actualizar");
+			Mensaje.mensajeAdvertencia(this, Constantes.MSG_SELECT_ROW_TO_UPDATE);
 		}
 	}
 

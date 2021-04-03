@@ -53,6 +53,7 @@ import gui.FrmProductoAvanzado;
 import gui.FrmProveedor;
 import gui.FrmSexo;
 import gui.FrmVenta;
+import util.Constantes;
 import util.ImagenFondo;
 import util.RelojFechaHora;
 
@@ -566,12 +567,12 @@ public class Sistema extends JFrame implements ActionListener, ComponentListener
 		
 		// Se establece los permisos (Se puede mejorar más haciéndolo con tablas de permisos en la base de datos)
 		switch (this.empleadoActual.getCargo().getDescripcion()) {
-			case "ADMINISTRADOR":case "GERENTE":
+			case Constantes.CARGO_ADMINISTRADOR:
+			case Constantes.CARGO_GERENTE:
 				// Todos los permisos
 				break;
 				
-			case "ALMACENERO":
-				
+			case Constantes.CARGO_ALMACENERO:
 				this.mnVentas.setEnabled(false);
 				this.mnMantenimientos.setEnabled(false);
 				this.mnConsultas.setEnabled(false);
@@ -585,7 +586,7 @@ public class Sistema extends JFrame implements ActionListener, ComponentListener
 				this.btnRealizarVenta.setEnabled(false);
 				break;
 				
-			case "VENDEDOR":
+			case Constantes.CARGO_VENDEDOR:
 				this.mnAlmacn.setEnabled(false);
 				this.mnCompras.setEnabled(false);
 				this.mnMantenimientos.setEnabled(false);
@@ -726,8 +727,7 @@ public class Sistema extends JFrame implements ActionListener, ComponentListener
 	}
 
 	protected void actionPerformedMntmSalir(ActionEvent e) {
-		int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea salir del Sistema?", "Confirmación",
-				JOptionPane.YES_NO_OPTION);
+		int respuesta = JOptionPane.showConfirmDialog(this, Constantes.MSG_CONFIRM_SYSTEM_EXIT, Constantes.MSG_TYPE_CONFIRM, JOptionPane.YES_NO_OPTION);
 		if (respuesta == JOptionPane.YES_OPTION) {
 			System.exit(0);
 		}

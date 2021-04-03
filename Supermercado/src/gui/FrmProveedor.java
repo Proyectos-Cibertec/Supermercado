@@ -34,6 +34,8 @@ import entidad.Distrito;
 import entidad.Proveedor;
 import model.DistritoModel;
 import model.ProveedorModel;
+import util.Constantes;
+import util.Constantes;
 import util.FechaUtil;
 import util.Mensaje;
 import util.TablaUtil;
@@ -521,9 +523,9 @@ public class FrmProveedor extends JInternalFrame implements ActionListener, Mous
 
 		if (salida > 0) {
 			this.listarProveedors(modelo.listarProveedor());
-			Mensaje.mensajeInformacion(this, "Registro exitoso");
+			Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_REGISTRATION);
 		} else {
-			Mensaje.mensajeError(this, "Ocurrió un error al registrar");
+			Mensaje.mensajeError(this, Constantes.MSG_FAILED_REGISTRATION);
 		}
 		this.limpiar();
 	}
@@ -539,16 +541,16 @@ public class FrmProveedor extends JInternalFrame implements ActionListener, Mous
 				this.listarProveedors(modelo.listarProveedor());
 
 				if (salida > 0) {
-					Mensaje.mensajeInformacion(this, "Eliminación correcta");
+					Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_REMOVED);
 				} else {
-					Mensaje.mensajeError(this, "Ocurrió un error al intentar eliminar");
+					Mensaje.mensajeError(this, Constantes.MSG_FAILED_REMOVED);
 				}
 				this.limpiar();
 				this.idSeleccionado = "";
 			}
 
 		} else {
-			Mensaje.mensajeAdvertencia(this, "Debe seleccionar una fila para eliminar");
+			Mensaje.mensajeAdvertencia(this, Constantes.MSG_SELECT_ROW_TO_DELETE);
 		}
 	}
 
@@ -651,9 +653,9 @@ public class FrmProveedor extends JInternalFrame implements ActionListener, Mous
 				this.listarProveedors(modelo.listarProveedor());
 
 				if (salida > 0) {
-					Mensaje.mensajeInformacion(this, "Actualización correcta");
+					Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_UPDATED);
 				} else {
-					Mensaje.mensajeError(this, "Ocurrió un error al intentar actualizar");
+					Mensaje.mensajeError(this, Constantes.MSG_FAILED_UPDATED);
 				}
 
 				this.limpiar();
@@ -661,7 +663,7 @@ public class FrmProveedor extends JInternalFrame implements ActionListener, Mous
 			}
 
 		} else {
-			Mensaje.mensajeAdvertencia(this, "Debe seleccionar una fila para actualizar");
+			Mensaje.mensajeAdvertencia(this, Constantes.MSG_SELECT_ROW_TO_UPDATE);
 		}
 	}
 

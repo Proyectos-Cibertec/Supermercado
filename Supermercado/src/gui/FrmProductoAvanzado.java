@@ -39,6 +39,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -54,11 +55,11 @@ import entidad.Proveedor;
 import model.CategoriaModel;
 import model.ProductoModel;
 import model.ProveedorModel;
+import util.Constantes;
 import util.FechaUtil;
 import util.Foto;
 import util.Mensaje;
 import util.TablaUtil;
-import javax.swing.border.LineBorder;
 
 public class FrmProductoAvanzado extends JInternalFrame
 		implements ActionListener, MouseListener, ChangeListener, KeyListener, ItemListener {
@@ -684,9 +685,9 @@ public class FrmProductoAvanzado extends JInternalFrame
 		int salida = modelo.insertarProducto(producto);
 
 		if (salida > 0) {
-			Mensaje.mensajeInformacion(this, "Registro exitoso");
+			Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_REGISTRATION);
 		} else {
-			Mensaje.mensajeError(this, "Ocurrió un error al registrar");
+			Mensaje.mensajeError(this, Constantes.MSG_FAILED_REGISTRATION);
 		}
 		this.limpiar();
 	}
@@ -700,16 +701,16 @@ public class FrmProductoAvanzado extends JInternalFrame
 
 				int salida = modelo.eliminarProducto(idSeleccionado);
 				if (salida > 0) {
-					Mensaje.mensajeInformacion(this, "Eliminación correcta");
+					Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_REMOVED);
 				} else {
-					Mensaje.mensajeError(this, "Ocurrió un error al intentar eliminar");
+					Mensaje.mensajeError(this, Constantes.MSG_FAILED_REMOVED);
 				}
 				this.limpiar();
 				this.idSeleccionado = "";
 			}
 
 		} else {
-			Mensaje.mensajeAdvertencia(this, "Debe seleccionar una fila para eliminar");
+			Mensaje.mensajeAdvertencia(this, Constantes.MSG_SELECT_ROW_TO_DELETE);
 		}
 	}
 
@@ -819,9 +820,9 @@ public class FrmProductoAvanzado extends JInternalFrame
 				this.listarProductos(modelo.listarProducto());
 				
 				if (salida > 0) {
-					Mensaje.mensajeInformacion(this, "Actualización correcta");
+					Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_UPDATED);
 				} else {
-					Mensaje.mensajeError(this, "Ocurrió un error al intentar actualizar");
+					Mensaje.mensajeError(this, Constantes.MSG_FAILED_UPDATED);
 				}
 
 				this.limpiar();
@@ -829,7 +830,7 @@ public class FrmProductoAvanzado extends JInternalFrame
 			}
 
 		} else {
-			Mensaje.mensajeAdvertencia(this, "Debe seleccionar una fila para actualizar");
+			Mensaje.mensajeAdvertencia(this, Constantes.MSG_SELECT_ROW_TO_UPDATE);
 		}
 	}
 

@@ -29,6 +29,7 @@ import javax.swing.table.TableColumnModel;
 
 import entidad.Distrito;
 import model.DistritoModel;
+import util.Constantes;
 import util.Mensaje;
 import util.TablaUtil;
 
@@ -301,9 +302,9 @@ public class FrmDistrito extends JInternalFrame implements ActionListener, Mouse
 
 		if (salida > 0) {
 			this.listarDistritos(modelo.listarDistrito());
-			Mensaje.mensajeInformacion(this, "Registro exitoso");
+			Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_REGISTRATION);
 		} else {
-			Mensaje.mensajeError(this, "Ocurrió un error al registrar");
+			Mensaje.mensajeError(this, Constantes.MSG_FAILED_REGISTRATION);
 		}
 		this.limpiar();
 	}
@@ -319,16 +320,16 @@ public class FrmDistrito extends JInternalFrame implements ActionListener, Mouse
 				this.listarDistritos(modelo.listarDistrito());
 
 				if (salida > 0) {
-					Mensaje.mensajeInformacion(this, "Eliminación correcta");
+					Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_REMOVED);
 				} else {
-					Mensaje.mensajeError(this, "Ocurrió un error al intentar eliminar");
+					Mensaje.mensajeError(this, Constantes.MSG_FAILED_REMOVED);
 				}
 				this.limpiar();
 				this.idSeleccionado = "";
 			}
 
 		} else {
-			Mensaje.mensajeAdvertencia(this, "Debe seleccionar una fila para eliminar");
+			Mensaje.mensajeAdvertencia(this, Constantes.MSG_SELECT_ROW_TO_DELETE);
 		}
 	}
 
@@ -361,16 +362,16 @@ public class FrmDistrito extends JInternalFrame implements ActionListener, Mouse
 				this.listarDistritos(modelo.listarDistrito());
 
 				if (salida > 0) {
-					Mensaje.mensajeInformacion(this, "Actualización correcta");
+					Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_UPDATED);
 				} else {
-					Mensaje.mensajeError(this, "Ocurrió un error al intentar actualizar");
+					Mensaje.mensajeError(this, Constantes.MSG_FAILED_UPDATED);
 				}
 				this.limpiar();
 				this.idSeleccionado = "";
 			}
 
 		} else {
-			Mensaje.mensajeAdvertencia(this, "Debe seleccionar una fila para actualizar");
+			Mensaje.mensajeAdvertencia(this, Constantes.MSG_SELECT_ROW_TO_UPDATE);
 		}
 	}
 

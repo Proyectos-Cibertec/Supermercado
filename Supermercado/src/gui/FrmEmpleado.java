@@ -32,6 +32,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -47,11 +48,11 @@ import model.CargoModel;
 import model.DistritoModel;
 import model.EmpleadoModel;
 import model.SexoModel;
+import util.Constantes;
 import util.FechaUtil;
 import util.Foto;
 import util.Mensaje;
 import util.TablaUtil;
-import javax.swing.border.LineBorder;
 
 public class FrmEmpleado extends JInternalFrame implements ActionListener, MouseListener, KeyListener {
 
@@ -734,9 +735,9 @@ public class FrmEmpleado extends JInternalFrame implements ActionListener, Mouse
 
 		if (salida > 0) {
 			this.listarEmpleados(modelo.listarEmpleado());
-			Mensaje.mensajeInformacion(this, "Registro exitoso");
+			Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_REGISTRATION);
 		} else {
-			Mensaje.mensajeError(this, "Ocurrió un error al registrar");
+			Mensaje.mensajeError(this, Constantes.MSG_FAILED_REGISTRATION);
 		}
 		this.limpiar();
 	}
@@ -752,16 +753,16 @@ public class FrmEmpleado extends JInternalFrame implements ActionListener, Mouse
 				this.listarEmpleados(modelo.listarEmpleado());
 
 				if (salida > 0) {
-					Mensaje.mensajeInformacion(this, "Eliminación correcta");
+					Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_REMOVED);
 				} else {
-					Mensaje.mensajeError(this, "Ocurrió un error al intentar eliminar");
+					Mensaje.mensajeError(this, Constantes.MSG_FAILED_REMOVED);
 				}
 				this.limpiar();
 				this.idSeleccionado = "";
 			}
 
 		} else {
-			Mensaje.mensajeAdvertencia(this, "Debe seleccionar una fila para eliminar");
+			Mensaje.mensajeAdvertencia(this, Constantes.MSG_SELECT_ROW_TO_DELETE);
 		}
 	}
 
@@ -923,9 +924,9 @@ public class FrmEmpleado extends JInternalFrame implements ActionListener, Mouse
 				this.listarEmpleados(modelo.listarEmpleado());
 
 				if (salida > 0) {
-					Mensaje.mensajeInformacion(this, "Actualización correcta");
+					Mensaje.mensajeInformacion(this, Constantes.MSG_SUCCESSFULLY_UPDATED);
 				} else {
-					Mensaje.mensajeError(this, "Ocurrió un error al intentar actualizar");
+					Mensaje.mensajeError(this, Constantes.MSG_FAILED_UPDATED);
 				}
 
 				this.limpiar();
@@ -933,7 +934,7 @@ public class FrmEmpleado extends JInternalFrame implements ActionListener, Mouse
 			}
 
 		} else {
-			Mensaje.mensajeAdvertencia(this, "Debe seleccionar una fila para actualizar");
+			Mensaje.mensajeAdvertencia(this, Constantes.MSG_SELECT_ROW_TO_UPDATE);
 		}
 	}
 
