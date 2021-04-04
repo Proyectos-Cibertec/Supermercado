@@ -13,7 +13,9 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -47,6 +49,12 @@ import entidad.Proveedor;
 import model.CategoriaModel;
 import model.ProductoModel;
 import model.ProveedorModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import util.Conexion;
 import util.Constantes;
 import util.FechaUtil;
 import util.Foto;
@@ -103,6 +111,7 @@ public class FrmProducto extends JInternalFrame implements ActionListener, Mouse
 	private File ficheroSeleccionado; // Foto
 	private JButton btnSubir;
 	private JButton btnCancelar;
+	private JButton btnReporte;
 
 	/**
 	 * Launch the application.
@@ -222,7 +231,7 @@ public class FrmProducto extends JInternalFrame implements ActionListener, Mouse
 		this.panel_2 = new JPanel();
 		this.panel_2
 				.setBorder(new TitledBorder(null, "Mantenimiento", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		this.panel_2.setBounds(899, 42, 102, 457);
+		this.panel_2.setBounds(899, 42, 102, 573);
 		this.contentPane.add(this.panel_2);
 		this.panel_2.setLayout(null);
 
@@ -261,6 +270,13 @@ public class FrmProducto extends JInternalFrame implements ActionListener, Mouse
 		this.btnLimpiar.setToolTipText("Limpiar");
 		this.btnLimpiar.setBounds(10, 280, 82, 82);
 		this.panel_2.add(this.btnLimpiar);
+		
+		btnReporte = new JButton("");
+		btnReporte.setIcon(new ImageIcon(FrmProducto.class.getResource("/iconos/btnReporte.png")));
+		btnReporte.setToolTipText("Reporte");
+		btnReporte.addActionListener(this);
+		btnReporte.setBounds(10, 454, 82, 82);
+		panel_2.add(btnReporte);
 		btnSalir.addActionListener(this);
 		btnRegistrar.addActionListener(this);
 
@@ -393,6 +409,9 @@ public class FrmProducto extends JInternalFrame implements ActionListener, Mouse
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnReporte) {
+			actionPerformedBtnReporte(e);
+		}
 		if (e.getSource() == this.btnCancelar) {
 			actionPerformedBtnCancelar(e);
 		}
@@ -913,11 +932,31 @@ public class FrmProducto extends JInternalFrame implements ActionListener, Mouse
 		this.lblFoto.setIcon(new ImageIcon(FrmProducto.class.getResource("/iconos/fotoProductoGenerica.png")));
 	}
 	
+	public void generarReporte() {
+		Map hashMap = new HashMap();
+		JasperReport jasperReport;
+		JasperPrint jasperPrint;
+		
+		try {
+			jasperReport = JasperCompileManager.compileReport(new File("").getAbsolutePath() + "/src/reportes/ReporteProductos.jrxml");
+			jasperPrint = JasperFillManager.fillReport(jasperReport, hashMap, (new Conexion()).getConexion());
+			JasperViewer view = new JasperViewer(jasperPrint, false);
+			view.setTitle("Reporte de productos");
+			view.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	protected void actionPerformedBtnSubir(ActionEvent e) {
 		this.seleccionarFoto();
 	}
 	
 	protected void actionPerformedBtnCancelar(ActionEvent e) {
 		this.cancelarFoto();
+	}
+	
+	protected void actionPerformedBtnReporte(ActionEvent e) {
+		this.generarReporte();
 	}
 }
