@@ -4,8 +4,10 @@ package inicio;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Optional;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,16 +18,15 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import entidad.Empleado;
-import model.LoginModel;
+import servicio.ServicioLogin;
 import util.Mensaje;
-import java.awt.Toolkit;
-import javax.swing.border.LineBorder;
-import javax.swing.SwingConstants;
 
 public class Login extends JFrame implements ActionListener {
 
@@ -39,7 +40,7 @@ public class Login extends JFrame implements ActionListener {
 	private JButton btnIngresar;
 	private JButton btnSalir;
 	private JPasswordField txtPassword;
-	private LoginModel modeloLogin;
+	private ServicioLogin servicioLogin;
 	private Empleado empleado = null;
 	private int contador; // Contabiliza el # de intentos de logeo
 	private JProgressBar pbBarraProgreso;
@@ -150,7 +151,7 @@ public class Login extends JFrame implements ActionListener {
 		this.lblFondo.setBounds(0, 0, 525, 245);
 		this.contentPane.add(this.lblFondo);
 
-		this.modeloLogin = new LoginModel();
+		this.servicioLogin = new ServicioLogin();
 
 		this.setLocationRelativeTo(null);
 	}
@@ -185,31 +186,25 @@ public class Login extends JFrame implements ActionListener {
 			return;
 		}
 
-		empleado = modeloLogin.login(usuario, password);
-
-		if (empleado == null) { // No existe el empleado cuyo usuario y password
-								// se ingresaron
-
-			contador++; // Cuenta las veces que un usuario intenta logearse al
-						// sistema
+		Optional<Empleado> optionalEmpleado = this.servicioLogin.login(usuario, password);
+		if (optionalEmpleado.isPresent()) {
+			this.empleado = optionalEmpleado.get();
+			iniciarEfectoDeCarga();
+		} else {
+			// No existe el empleado cuyo usuario y password se ingresaron
+			contador++; // Cuenta las veces que un usuario intenta logearse al sistema
 
 			// Verifica que no se haya pasado el lmite de intentos fallidos
 			if (contador == 3) {
-				Mensaje.mensajeError(this,
-						"Ha sobrepasado el lmite de intentos fallidos. Comunquese con el Administrador del Sistema");
+				Mensaje.mensajeError(this, "Ha sobrepasado el lmite de intentos fallidos. Comunquese con el Administrador del Sistema");
 				System.exit(0);
 			}
 
-			Mensaje.mensajeError(this,
-					"El usuario y/o contrasea que ha ingresado es incorrecto. Intente nuevamente.\n"
-							+ "Verifique la tecla Bloq Mayus. Recuerde que luego de 3 intentos fallidos el programa "
-							+ "se cerrar.");
+			Mensaje.mensajeError(this, "El usuario y/o contrasea que ha ingresado es incorrecto. Intente nuevamente.\n"
+							+ "Verifique la tecla Bloq Mayus. Recuerde que luego de 3 intentos fallidos el programa se cerrar.");
 			txtUsuario.setText("");
 			txtPassword.setText("");
 			txtUsuario.requestFocus();
-
-		} else {
-			iniciarEfectoDeCarga();
 		}
 	}
 
