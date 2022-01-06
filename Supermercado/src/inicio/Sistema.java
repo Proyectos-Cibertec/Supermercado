@@ -54,6 +54,7 @@ import gui.FrmProveedor;
 import gui.FrmSexo;
 import gui.FrmVenta;
 import util.Constantes;
+import util.FechaUtil;
 import util.ImagenFondo;
 import util.RelojFechaHora;
 
@@ -540,7 +541,7 @@ public class Sistema extends JFrame implements ActionListener, ComponentListener
 		this.mntmTipoUsuario.setIcon(new ImageIcon(Sistema.class.getResource("/iconos/iconoUsuarioBarraEstado.png")));
 		this.barraEstado.add(this.mntmTipoUsuario);
 		
-		this.mntmDerechosReservados = new JMenuItem("Derechos Reservados 2017 - Supermercado v1.0");
+		this.mntmDerechosReservados = new JMenuItem("Derechos Reservados " + FechaUtil.getCurrentYear() + " - Supermercado v1.0");
 		this.mntmDerechosReservados.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		this.mntmDerechosReservados.setIcon(new ImageIcon(Sistema.class.getResource("/iconos/iconoCopyright.png")));
 		this.barraEstado.add(this.mntmDerechosReservados);

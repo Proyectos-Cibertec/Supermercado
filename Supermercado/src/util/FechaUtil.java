@@ -1,6 +1,7 @@
 package util;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class FechaUtil {
@@ -53,5 +54,9 @@ public class FechaUtil {
 		}
 		
 		return dateFecha;
+	}
+	
+	public static int getCurrentYear() {
+		return Calendar.getInstance().get(Calendar.YEAR);
 	}
 }
