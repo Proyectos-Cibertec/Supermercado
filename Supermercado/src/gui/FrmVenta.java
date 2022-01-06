@@ -45,6 +45,7 @@ import model.ProductoModel;
 import model.VentaModel;
 import util.FechaUtil;
 import util.Mensaje;
+import util.Parametros;
 import util.Redondear;
 import util.TablaUtil;
 
@@ -121,6 +122,7 @@ public class FrmVenta extends JInternalFrame implements ActionListener, MouseLis
 	private double impuesto;
 	private double totalAPagar;
 	private JLabel lblNewLabel_2;
+	private double igv = Parametros.IGV;
 
 	/**
 	 * Launch the application.
@@ -545,7 +547,7 @@ public class FrmVenta extends JInternalFrame implements ActionListener, MouseLis
 		this.cboTipoComprobante.addItemListener(this);
 		this.cboTipoComprobante.setModel(new DefaultComboBoxModel<String>(new String[] { "FACTURA", "BOLETA" }));
 		this.btnBuscarCliente.addActionListener(this);
-
+		
 		this.limpiar();
 	}
 
@@ -581,8 +583,8 @@ public class FrmVenta extends JInternalFrame implements ActionListener, MouseLis
 		txtDni.setText("");
 		txtDistrito.setText("");
 		this.cboTipoComprobante.setSelectedIndex(0);
-		this.txtSerieComprobante.setText("001"); //
-		this.txtIgv.setText("18");
+		this.txtSerieComprobante.setText("001");
+		this.txtIgv.setText(String.valueOf(this.igv * 100)); // Carga valor de IGV de base de datos
 		this.jdFechaVenta.setDate(FechaUtil.today());
 		this.modeloTabla.setRowCount(0);
 		this.txtIdVenta.setText(this.modeloVenta.generarCodigoVenta());
@@ -721,7 +723,7 @@ public class FrmVenta extends JInternalFrame implements ActionListener, MouseLis
 		this.limpiarDetalle();
 
 		this.subtotal += total;
-		this.impuesto = 0.18 * this.subtotal;
+		this.impuesto = this.igv * this.subtotal;
 		this.totalAPagar = this.subtotal + this.impuesto;
 		this.actualizarTotales();
 	}
@@ -736,7 +738,7 @@ public class FrmVenta extends JInternalFrame implements ActionListener, MouseLis
 			double total = Double.parseDouble(this.modeloTabla.getValueAt(filaSeleccionada, 6).toString());
 
 			this.subtotal -= total;
-			this.impuesto = 0.18 * this.subtotal;
+			this.impuesto = this.igv * this.subtotal;
 			this.totalAPagar = this.subtotal + this.impuesto;
 			this.actualizarTotales();
 
@@ -816,7 +818,7 @@ public class FrmVenta extends JInternalFrame implements ActionListener, MouseLis
 		}
 
 		this.subtotal = this.subtotal + total - anteriorTotal;
-		this.impuesto = 0.18 * this.subtotal;
+		this.impuesto = this.igv * this.subtotal;
 		this.totalAPagar = this.subtotal + this.impuesto;
 		this.actualizarTotales();
 

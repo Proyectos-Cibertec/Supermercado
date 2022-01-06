@@ -1,6 +1,9 @@
 package util;
 
 public class Constantes {
+	// Valores por defecto
+	public static final double IGV = 0.18;
+	
 	// Cargos o Roles
 	public static final String CARGO_ADMINISTRADOR = "ADMINISTRADOR";
 	public static final String CARGO_GERENTE = "GERENTE";
@@ -23,4 +26,7 @@ public class Constantes {
 	public static final String MSG_FAILED_UPDATED = "Ocurrió un error al intentar actualizar";
 	public static final String MSG_SELECT_ROW_TO_DELETE = "Debe seleccionar una fila para eliminar";
 	public static final String MSG_SELECT_ROW_TO_UPDATE = "Debe seleccionar una fila para actualizar";
+	
+	// Parámetros
+	public static final String PARAM_IGV_PERU = "igv.peru";
 }
