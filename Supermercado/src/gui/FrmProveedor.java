@@ -35,7 +35,6 @@ import entidad.Proveedor;
 import model.DistritoModel;
 import model.ProveedorModel;
 import util.Constantes;
-import util.Constantes;
 import util.FechaUtil;
 import util.Mensaje;
 import util.TablaUtil;
