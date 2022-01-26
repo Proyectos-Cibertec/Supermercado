@@ -437,16 +437,16 @@ public class FrmProducto extends JInternalFrame implements ActionListener, Mouse
 
 	public void llenarCategorias() {
 		List<Categoria> categorias = modeloCategoria.listarCategoria();
-		for (Categoria categoria : categorias) {
+		categorias.forEach(categoria -> {
 			this.cboCategoria.addItem(categoria.getNombre());
-		}
+		});
 	}
 
 	public void llenarProveedores() {
 		List<Proveedor> proveedores = modeloProveedor.listarProveedor();
-		for (Proveedor proveedor : proveedores) {
+		proveedores.forEach(proveedor -> {
 			this.cboProveedor.addItem(proveedor.getRazonSocial());
-		}
+		});
 	}
 
 	public void formatearTabla() {
@@ -476,14 +476,13 @@ public class FrmProducto extends JInternalFrame implements ActionListener, Mouse
 		this.modeloTabla.setRowCount(0);
 
 		// Se añade a la tabla los productos fila a fila
-		for (Producto producto : productos) {
+		productos.forEach(producto -> {
 			Object[] fila = { producto.getIdProducto(), producto.getNombre(), producto.getCategoria().getNombre(),
 					producto.getProveedor().getRazonSocial(), producto.getPrecioVenta(), producto.getPrecioCompra(),
 					producto.getStockActual(), producto.getStockMinimo(),
 					FechaUtil.formatoDeFechaClasico(producto.getFechaRegistro()), producto.getDescripcion() };
-
 			this.modeloTabla.addRow(fila);
-		}
+		});
 
 		this.lblNumeroRegistros.setText(String.valueOf(productos.size()));
 	}
