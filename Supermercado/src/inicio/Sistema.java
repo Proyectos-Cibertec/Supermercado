@@ -566,7 +566,7 @@ public class Sistema extends JFrame implements ActionListener, ComponentListener
 		this.lblCargo.setText(this.empleadoActual.getCargo().getDescripcion());
 		this.mntmTipoUsuario.setText("Tipo de Usuario: " + this.empleadoActual.getCargo().getDescripcion());
 		
-		// Se establece los permisos (Se puede mejorar más haciéndolo con tablas de permisos en la base de datos)
+		// Se establece los permisos (Se puede mejorar mï¿½s haciï¿½ndolo con tablas de permisos en la base de datos)
 		switch (this.empleadoActual.getCargo().getDescripcion()) {
 			case Constantes.CARGO_ADMINISTRADOR:
 			case Constantes.CARGO_GERENTE:
@@ -773,13 +773,21 @@ public class Sistema extends JFrame implements ActionListener, ComponentListener
 
 	// Centra un JInternalFrame
 	public static void centrar(JInternalFrame frm) {
-		// Dimensiones de la pantalla
-		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-		// Dimensiones del formulario
-		Dimension ventana = frm.getSize();
-
-		int posX = (int) (pantalla.getWidth() - ventana.getWidth()) / 2;
-		frm.setLocation(posX, 20);
+//		// Dimensiones de la pantalla
+//		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+//		// Dimensiones del formulario
+//		Dimension ventana = frm.getSize();
+//
+//		int posX = (int) (pantalla.getWidth() - ventana.getWidth()) / 2;
+//		int posY = (int) (pantalla.getHeight() - ventana.getHeight() / 2);
+//		frm.setLocation(posX, posY);
+		
+		
+		Dimension desktopSize = desktopPane.getSize();
+		Dimension jInternalFrameSize = frm.getSize();;
+		frm.setLocation(
+			(desktopSize.width - jInternalFrameSize.width) / 2, 
+			(desktopSize.height - jInternalFrameSize.height / 2));
 	}
 	
 	// Centra un label
