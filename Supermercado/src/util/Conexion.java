@@ -5,8 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-	private final static String DRIVER = "com.mysql.jdbc.Driver";
-	private final static String URL_DATABASE = "jdbc:mysql://localhost:3306/supermercado";
+	private final static String DRIVER = "com.mysql.cj.jdbc.Driver";
+	private final static String URL_DATABASE = "jdbc:mysql://localhost:3306/supermercado?useSSL=false";
+	
 	private final static String USUARIO = "root";
 	private final static String PASSWORD = "mysql";
 	
@@ -16,14 +17,14 @@ public class Conexion {
 		try {
 			Class.forName(DRIVER);
 			conexion = DriverManager.getConnection(URL_DATABASE, USUARIO, PASSWORD);
-			// javax.swing.JOptionPane.showMessageDialog(null, "Conexión OK");
+			// javax.swing.JOptionPane.showMessageDialog(null, "ConexiÃ³n OK");
 			
 		} catch (ClassNotFoundException e) {
 			javax.swing.JOptionPane.showMessageDialog(null, "Error en el driver");
 			e.printStackTrace();
 			
 		} catch (SQLException e) {
-			javax.swing.JOptionPane.showMessageDialog(null, "Error en la conexión");
+			javax.swing.JOptionPane.showMessageDialog(null, "Error en la conexiÃ³n");
 			e.printStackTrace();
 		}
 		
